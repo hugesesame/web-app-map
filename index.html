@@ -417,7 +417,20 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
 .tile-dark .fig figcaption,.tile-dark-2 .fig figcaption,.tile-dark-3 .fig figcaption{color:var(--body-muted);}
 
 /* 読了チェック */
-.done-row{display:flex;align-items:center;gap:var(--s-sm);flex-wrap:wrap;}
+.done-row{display:flex;align-items:center;gap:var(--s-xs);flex-wrap:wrap;}
+/* 長い本文を読み終えた位置で「畳む・先へ進む」を完結させる */
+.topic-collapse,.topic-next{
+  display:inline-flex;align-items:center;gap:6px;min-height:44px;
+  padding:8px 14px;border-radius:var(--r-pill);
+  font-size:14px;font-weight:600;letter-spacing:-.224px;
+  transition:transform .12s ease;
+}
+.topic-collapse{margin-left:auto;color:var(--ink-muted-48);}
+.topic-next{color:var(--primary);}
+.topic-collapse:active,.topic-next:active{transform:scale(.95);}
+.tile-dark .topic-collapse,.tile-dark-2 .topic-collapse,.tile-dark-3 .topic-collapse{color:var(--body-muted);}
+.tile-dark .topic-next,.tile-dark-2 .topic-next,.tile-dark-3 .topic-next{color:var(--primary-on-dark);}
+.topic-next[hidden]{display:none;}
 .done-btn{
   display:inline-flex;align-items:center;gap:8px;min-height:44px;
   padding:8px 18px;border-radius:var(--r-pill);
@@ -661,7 +674,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
 
 @media print{
 
-  .gnav,.subnav,.sticky,.search,.done-btn,.copy-btn{display:none!important;}
+  .gnav,.subnav,.sticky,.search,.done-btn,.copy-btn,.topic-collapse,.topic-next{display:none!important;}
   main{padding-top:0;}
   .topic__body{display:block!important;}
   body{background:#fff;color:#000;}
@@ -851,7 +864,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>ログイン・保存・人ごとに違う表示 — このどれかが要るなら、あなたが作りたいのは「Webアプリ」です。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -919,7 +932,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>Webアプリのすべての動作は「ブラウザが頼む → サーバーが返す」の往復。不具合はこの往復のどこかで起きています。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -988,7 +1001,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>入力 → 処理 → 保存 → 表示。この4語が、これから出会うすべての専門用語の住所になります。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1052,7 +1065,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>フロントエンドは全世界に公開された掲示板だと思ってください。秘密は必ずバックエンドへ。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1117,7 +1130,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>無い＝HTML、崩れてる＝CSS、動かない＝JavaScript。担当を名指しして、範囲を限定して頼む。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1179,7 +1192,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>ドメイン＝名前、DNS＝電話帳、https＝暗号化。ドメインの繋がらなさは、多くの場合ただの反映待ち。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1246,7 +1259,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>2xx＝成功、4xx＝こちらの頼み方、5xx＝向こうの不具合。数字をそのままAIに伝えるだけで会話が進みます。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1310,7 +1323,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>localhost は自分専用。人に見せる＝デプロイする。そして本番には設定を別途持ち込む必要がある。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1373,7 +1386,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>目指すのは「書ける」ではなく「判断できる」。AIに"なぜ?"と聞き返せれば、あなたは十分に共同制作者です。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1450,7 +1463,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>ターミナルでやるのは「移動・実行・読む」の3つだけ。あなたの本業は3つ目の「読んでAIに渡す」です。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1512,7 +1525,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>package.json は注文書（守る）、node_modules は倉庫（捨ててよい）。そして sudo で殴らない。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1575,7 +1588,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>1アプリ＝1フォルダ。エディタではそのフォルダだけを開く。AIに渡す権限は必要最小限に。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1645,7 +1658,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>目的・制約・完了条件・範囲。指示が長くなるほど、やり直しは短くなります。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1717,7 +1730,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>1指示1機能。作る前に計画だけ出させる。思いついた追加機能は、実装せずメモへ。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1780,7 +1793,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>手順・結果・期待の3点＋エラー文の丸ごと貼付。これだけで解決までの往復が激減します。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1845,7 +1858,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>3回直らなければ修正を止める。「直して」を「なぜ?」に変える。そして戻れる場所を先に作っておく。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1909,7 +1922,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>提案されたパッケージ名は、入れる前に公式サイトで実在確認。そして「自前で書けませんか?」と一度聞く。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -1975,7 +1988,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>右クリック →「検証」。Console に赤があればブラウザ側、Network が赤ければサーバー側。開いてから操作する。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2065,7 +2078,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>AIに大きな指示を出す前に、必ずコミット。30秒の保険が、数時間の絶望を防ぎます。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2138,7 +2151,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>保存・差分・戻す。差分の量を見るだけで、AIが余計なことをしたかどうかが分かります。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2203,7 +2216,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>迷ったら private。push前にファイル一覧を確認。漏らしたら、消すより先に鍵を無効化する。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2276,7 +2289,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>秘密は .env に。.gitignore に載せて持ち出し禁止に。example ファイルに値を書かない。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2343,7 +2356,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>PUBLIC / VITE_ が付く変数はガラス張り。秘密の鍵は必ずサーバー側。管理者鍵をフロントに置かない。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2408,7 +2421,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>サーバー処理と秘密の鍵が要るかどうかが分岐点。要らないなら GitHub Pages で十分です。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2475,7 +2488,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>ビルドログ →環境変数の登録 →再デプロイ。この3点確認で、本番トラブルの大半は自力で終わります。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2542,7 +2555,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>データベースはルール付きの表計算。実装より先に設計を出させ、「誰のデータか」の列を最初から持つ。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2612,7 +2625,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>APIは有料の自動販売機、JSONはその包装。呼ぶのはサーバーから、そして呼びすぎない。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2695,7 +2708,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>認証（誰か）と認可（何をしてよいか）は別物。認可は明示的に頼まないと実装されません。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2763,7 +2776,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>データベースの鍵は初期状態で開いています。「有効か」と「条件が正しいか」を必ず両方確認する。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2828,7 +2841,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>CORSはバグではなく防御。直すのはブラウザ側ではなくサーバー側。全開放で黙らせない。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2893,7 +2906,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>AIの記憶は有限。前提はファイルに書き置く。回答が乱れたら、粘らず会話を作り直す。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -2954,7 +2967,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>「何を・なぜ・何が壊れうるか・どう確認するか」。この4問に答えられないものは受け入れない。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -3014,7 +3027,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>「機能と一緒にテストも」と頼む。壊れたら困るものから。そしてテストを緩めて通さない。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -3072,7 +3085,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>離陸前の読み上げを習慣に。点検はコード変更と分け、報告だけを先に受け取る。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -3144,7 +3157,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>費用は4箇所から発生する。使い始める前に上限アラートを張る。無料公開と無料運用は別の話。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -3215,7 +3228,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       <div class="summary-box"><p>公開は4段階で。持たなくていい情報は持たない。そして、まず自分のために作ることを恐れない。</p></div>
     </div>
 
-    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button></div></div>
+    <div class="blk"><div class="done-row"><button class="done-btn" type="button">読んだ</button><button class="topic-collapse" type="button" aria-label="このトピックを閉じる"><span aria-hidden="true">▲</span> 閉じる</button><button class="topic-next" type="button" aria-label="次のトピックを開く">次へ <span aria-hidden="true">›</span></button></div></div>
   </div>
 </details>
 
@@ -3640,6 +3653,21 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
   }
   var state = load();
 
+  /* ---------- 共通: トピック見出しへスクロール ---------- */
+  var HEADER_OFFSET = 110;
+  function scrollToTopic(el){
+    /* 畳んだ直後はレイアウトが変わるため、必ず変更後に位置を測る */
+    var y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    window.scrollTo({ top: y < 0 ? 0 : y, behavior: SCROLL_BEHAVIOR });
+  }
+  function nextVisibleTopic(from){
+    var i = topics.indexOf(from);
+    for(var j = i + 1; j < topics.length; j++){
+      if(!topics[j].classList.contains('is-filtered-out')) return topics[j];
+    }
+    return null;
+  }
+
   /* ---------- progress ---------- */
   function levelOf(topic){
     var sec = topic.closest('section[data-level]');
@@ -3680,15 +3708,39 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
     if(sf) sf.style.width = (TOTAL ? Math.round(doneTotal / TOTAL * 100) : 0) + '%';
   }
 
-  topics.forEach(function(t){
+  topics.forEach(function(t, idx){
     var btn = t.querySelector('.done-btn');
-    if(!btn) return;
-    btn.addEventListener('click', function(){
-      var id = t.getAttribute('data-topic');
-      if(state[id]){ delete state[id]; } else { state[id] = 1; }
-      save(state);
-      render();
-    });
+    if(btn){
+      btn.addEventListener('click', function(){
+        var id = t.getAttribute('data-topic');
+        if(state[id]){ delete state[id]; } else { state[id] = 1; }
+        save(state);
+        render();
+      });
+    }
+
+    /* 閉じる: 畳んでから、このトピックの見出し位置へ戻す */
+    var btnClose = t.querySelector('.topic-collapse');
+    if(btnClose){
+      btnClose.addEventListener('click', function(){
+        t.open = false;
+        scrollToTopic(t);
+      });
+    }
+
+    /* 次へ: 次のトピックを開いて、その見出しへ。今のトピックは閉じない */
+    var btnNext = t.querySelector('.topic-next');
+    if(btnNext){
+      if(idx === topics.length - 1){
+        btnNext.hidden = true;
+      }
+      btnNext.addEventListener('click', function(){
+        var nx = nextVisibleTopic(t);
+        if(!nx) return;
+        nx.open = true;
+        scrollToTopic(nx);
+      });
+    }
   });
 
   var resetLink = document.querySelector('[data-reset-progress]');
@@ -3818,8 +3870,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
         return;
       }
       next.open = true;
-      var y = next.getBoundingClientRect().top + window.scrollY - 110;
-      window.scrollTo({ top: y, behavior: SCROLL_BEHAVIOR });
+      scrollToTopic(next);
     });
   }
 
