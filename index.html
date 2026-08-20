@@ -569,6 +569,16 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
 .sticky__bar{height:3px;border-radius:var(--r-pill);background:var(--divider-soft);margin-top:6px;overflow:hidden;}
 .sticky__fill{height:100%;width:0;background:var(--primary);transition:width .35s ease;}
 .sticky .btn{min-height:44px;padding:11px 22px;font-size:14px;white-space:nowrap;}
+/* 開いているトピックが2つ以上のときだけ現れる一括クローズ */
+.sticky__collapse{
+  flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-width:44px;min-height:44px;padding:0 14px;border-radius:var(--r-pill);
+  color:var(--ink-muted-48);font-size:14px;font-weight:600;letter-spacing:-.224px;
+  white-space:nowrap;transition:transform .12s ease;
+}
+.sticky__collapse:active{transform:scale(.95);}
+.sticky__collapse svg{width:18px;height:18px;}
+.sticky__collapse[hidden]{display:none;}
 
 /* ============================================================
    Footer
@@ -646,6 +656,8 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
   .stat__n{font-size:32px;}
   .tab{padding:0 12px;font-size:13px;}
   .sticky__text{font-size:12px;}
+  .sticky__collapse{padding:0;}
+  .sticky__collapse-label{display:none;}
 }
 
 /* ---- 図解のローカルトークン（タイル背景に応じて反転） ---- */
@@ -3628,6 +3640,10 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
       読了 <b><span id="sticky-done">0</span> / 36</b> トピック
       <div class="sticky__bar"><div class="sticky__fill" id="sticky-fill"></div></div>
     </div>
+    <button class="sticky__collapse" id="collapse-all" type="button" hidden aria-label="開いているトピックをすべて閉じる">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 13l6-6 6 6"/><path d="M5 18h14"/></svg>
+      <span class="sticky__collapse-label">全て閉じる</span>
+    </button>
     <a class="btn btn-primary" href="#" id="sticky-next">次の未読へ</a>
   </div>
 </div>
@@ -3659,6 +3675,14 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
     /* 畳んだ直後はレイアウトが変わるため、必ず変更後に位置を測る */
     var y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
     window.scrollTo({ top: y < 0 ? 0 : y, behavior: SCROLL_BEHAVIOR });
+  }
+  function sectionInView(){
+    var secs = Array.prototype.slice.call(document.querySelectorAll('main > section'));
+    var cur = secs[0] || null;
+    secs.forEach(function(sec){
+      if(sec.getBoundingClientRect().top - 140 <= 0) cur = sec;
+    });
+    return cur;
   }
   function nextVisibleTopic(from){
     var i = topics.indexOf(from);
@@ -3752,6 +3776,38 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
         save(state);
         render();
       }
+    });
+  }
+
+  /* ---------- 一括クローズ ---------- */
+  var btnCollapseAll = document.getElementById('collapse-all');
+
+  function openCount(){
+    var n = 0;
+    topics.forEach(function(t){ if(t.open) n++; });
+    return n;
+  }
+  function syncCollapseAll(){
+    if(btnCollapseAll) btnCollapseAll.hidden = openCount() < 2;
+  }
+
+  if(btnCollapseAll){
+    btnCollapseAll.addEventListener('click', function(){
+      /* 畳む前に、いま見ているセクションを控えておく */
+      var sec = sectionInView();
+      var anchor = sec ? (sec.querySelector('.level__head') || sec) : null;
+
+      topics.forEach(function(t){ t.open = false; });
+      syncCollapseAll();
+
+      /* 畳んだ後にレイアウトを測り直してから移動する */
+      if(anchor){
+        var y = anchor.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+        window.scrollTo({ top: y < 0 ? 0 : y, behavior: SCROLL_BEHAVIOR });
+      }
+    });
+    topics.forEach(function(t){
+      t.addEventListener('toggle', syncCollapseAll);
     });
   }
 
@@ -3972,6 +4028,7 @@ pre code{background:none;color:inherit;padding:0;font-size:13px;line-height:1.8;
   spy();
   toggleSticky();
   openFromHash();
+  syncCollapseAll();
 })();
 </script>
 </body>
